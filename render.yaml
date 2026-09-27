@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: medora-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && npx prisma generate
+    startCommand: npm run db:deploy && npm start
+    region: singapore
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: PORT
+        value: "10000"
+  - type: static
+    name: medora-web
+    buildCommand: echo "No build required"
+    staticPublishPath: web
+    envVars: []

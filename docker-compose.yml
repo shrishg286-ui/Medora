@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: medora-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: medora
+      POSTGRES_USER: medora
+      POSTGRES_PASSWORD: medora_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - medora_pgdata:/var/lib/postgresql/data
+
+volumes:
+  medora_pgdata:
